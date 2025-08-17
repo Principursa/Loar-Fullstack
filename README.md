@@ -1,5 +1,6 @@
 # 🌌 LOAR: Decentralized Narrative Control Suite
 
+Try it at Lazyji.xyz!
 <div align="center">
 
 ![LOAR Banner](https://fungerbil.com/LOARLOGO.png)
