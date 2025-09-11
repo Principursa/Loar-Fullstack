@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 import { ModeToggle } from "./mode-toggle";
-import { DynamicWalletButton } from "./dynamic-wallet-button";
+import { WalletButton } from "./wallet-button";
 
 export default function Header() {
   const links = [
@@ -28,9 +28,11 @@ export default function Header() {
             );
           })}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <ModeToggle />
-          <DynamicWalletButton />
+          <div className="border-l border-gray-200 dark:border-gray-700 pl-3">
+            <WalletButton />
+          </div>
         </div>
       </div>
       <hr />

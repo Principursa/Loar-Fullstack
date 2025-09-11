@@ -132,3 +132,279 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Netflix-style scrollbar hiding */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+/* Porto Modal Styling */
+.porto-modal,
+[data-porto-modal],
+iframe[src*="porto"],
+div[class*="porto"],
+div[id*="porto"],
+div[class*="modal"],
+div[id*="modal"],
+[role="dialog"],
+.modal,
+.dialog {
+  max-width: 70vw !important;
+  max-height: 70vh !important;
+  width: 300px !important;
+  height: 400px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 9999 !important;
+}
+
+/* Porto Modal Content */
+.porto-modal *,
+[data-porto-modal] *,
+iframe[src*="porto"] *,
+div[class*="porto"] *,
+div[id*="porto"] * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Porto Modal Specific Elements */
+.porto-modal iframe,
+[data-porto-modal] iframe,
+iframe[src*="porto"] {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  border-radius: 12px !important;
+}
+
+/* Porto Modal Body Content */
+.porto-modal .modal-body,
+[data-porto-modal] .modal-body,
+.porto-modal .content,
+[data-porto-modal] .content,
+.porto-modal .passkey-content,
+[data-porto-modal] .passkey-content,
+.porto-modal .qr-container,
+[data-porto-modal] .qr-container {
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  padding: 12px !important;
+  font-size: 14px !important;
+}
+
+/* Porto QR Code Sizing */
+.porto-modal .qr-code,
+[data-porto-modal] .qr-code,
+.porto-modal img[alt*="QR"],
+[data-porto-modal] img[alt*="QR"],
+.porto-modal canvas,
+[data-porto-modal] canvas,
+.porto-modal svg,
+[data-porto-modal] svg {
+  max-width: 150px !important;
+  max-height: 150px !important;
+  width: 120px !important;
+  height: 120px !important;
+  margin: 8px auto !important;
+  display: block !important;
+}
+
+/* Porto Modal Form Elements */
+.porto-modal form,
+[data-porto-modal] form,
+.porto-modal .form,
+[data-porto-modal] .form {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Porto Modal Text and Instructions */
+.porto-modal h1,
+.porto-modal h2,
+.porto-modal h3,
+[data-porto-modal] h1,
+[data-porto-modal] h2,
+[data-porto-modal] h3 {
+  font-size: 14px !important;
+  margin: 4px 0 !important;
+  line-height: 1.2 !important;
+}
+
+.porto-modal p,
+.porto-modal .instruction,
+[data-porto-modal] p,
+[data-porto-modal] .instruction {
+  font-size: 10px !important;
+  margin: 2px 0 !important;
+  line-height: 1.3 !important;
+  padding: 0 4px !important;
+}
+
+/* Dynamic passkey content - controlled by JavaScript */
+.porto-modal .passkey-instructions,
+[data-porto-modal] .passkey-instructions,
+.porto-modal [class*="passkey"],
+[data-porto-modal] [class*="passkey"],
+.porto-modal [class*="webauthn"],
+[data-porto-modal] [class*="webauthn"],
+.porto-modal [class*="biometric"],
+[data-porto-modal] [class*="biometric"],
+.porto-modal [class*="fingerprint"],
+[data-porto-modal] [class*="fingerprint"],
+.porto-modal [class*="face-id"],
+[data-porto-modal] [class*="face-id"],
+.porto-modal [class*="touch-id"],
+[data-porto-modal] [class*="touch-id"] {
+  /* Default: show passkey elements */
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transition: opacity 0.3s ease, visibility 0.3s ease !important;
+}
+
+/* Hide passkey when disabled by user preference */
+.porto-modal.passkey-disabled .passkey-instructions,
+[data-porto-modal].passkey-disabled .passkey-instructions,
+.porto-modal.passkey-disabled [class*="passkey"],
+[data-porto-modal].passkey-disabled [class*="passkey"],
+.porto-modal.passkey-disabled [class*="webauthn"],
+[data-porto-modal].passkey-disabled [class*="webauthn"],
+.porto-modal.passkey-disabled [class*="biometric"],
+[data-porto-modal].passkey-disabled [class*="biometric"],
+.porto-modal.passkey-disabled [class*="fingerprint"],
+[data-porto-modal].passkey-disabled [class*="fingerprint"],
+.porto-modal.passkey-disabled [class*="face-id"],
+[data-porto-modal].passkey-disabled [class*="face-id"],
+.porto-modal.passkey-disabled [class*="touch-id"],
+[data-porto-modal].passkey-disabled [class*="touch-id"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Hide WebAuthn warnings and errors */
+.porto-modal .webauthn-warning,
+[data-porto-modal] .webauthn-warning,
+.porto-modal .webauthn-error,
+[data-porto-modal] .webauthn-error {
+  display: none !important;
+}
+
+/* Hide passkey authentication buttons and options */
+.porto-modal button[class*="passkey"],
+[data-porto-modal] button[class*="passkey"],
+.porto-modal button[class*="webauthn"],
+[data-porto-modal] button[class*="webauthn"],
+.porto-modal button[class*="biometric"],
+[data-porto-modal] button[class*="biometric"],
+.porto-modal [data-testid*="passkey"],
+[data-porto-modal] [data-testid*="passkey"],
+.porto-modal [data-testid*="webauthn"],
+[data-porto-modal] [data-testid*="webauthn"],
+.porto-modal [aria-label*="passkey"],
+[data-porto-modal] [aria-label*="passkey"],
+.porto-modal [aria-label*="biometric"],
+[data-porto-modal] [aria-label*="biometric"],
+.porto-modal [title*="passkey"],
+[data-porto-modal] [title*="passkey"],
+.porto-modal [title*="biometric"],
+[data-porto-modal] [title*="biometric"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Hide authentication method selectors that include passkey */
+.porto-modal [class*="auth-method"],
+[data-porto-modal] [class*="auth-method"],
+.porto-modal [class*="signin-method"],
+[data-porto-modal] [class*="signin-method"],
+.porto-modal [class*="login-method"],
+[data-porto-modal] [class*="login-method"] {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.porto-modal [class*="auth-method"] > *:not([class*="email"]):not([class*="password"]):not([class*="otp"]),
+[data-porto-modal] [class*="auth-method"] > *:not([class*="email"]):not([class*="password"]):not([class*="otp"]) {
+  display: none !important;
+}
+
+/* Ensure proper WebAuthn support */
+.porto-modal .webauthn-container,
+[data-porto-modal] .webauthn-container {
+  min-height: 200px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Porto Modal Buttons */
+.porto-modal button,
+[data-porto-modal] button,
+.porto-modal .btn,
+[data-porto-modal] .btn {
+  font-size: 12px !important;
+  padding: 8px 12px !important;
+  margin: 4px !important;
+  min-height: 32px !important;
+}
+
+/* Porto Modal Responsive */
+@media (max-width: 768px) {
+  .porto-modal,
+  [data-porto-modal],
+  iframe[src*="porto"],
+  div[class*="porto"],
+  div[id*="porto"],
+  div[class*="modal"],
+  div[id*="modal"],
+  [role="dialog"],
+  .modal,
+  .dialog {
+    max-width: 85vw !important;
+    max-height: 85vh !important;
+    width: 280px !important;
+    height: 350px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .porto-modal,
+  [data-porto-modal],
+  iframe[src*="porto"],
+  div[class*="porto"],
+  div[id*="porto"],
+  div[class*="modal"],
+  div[id*="modal"],
+  [role="dialog"],
+  .modal,
+  .dialog {
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    width: 260px !important;
+    height: 320px !important;
+    border-radius: 6px !important;
+  }
+}

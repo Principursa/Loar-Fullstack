@@ -24,15 +24,17 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['@dynamic-labs/sdk-react-core'],
+    exclude: [],
   },
   ssr: {
-    noExternal: ['@dynamic-labs/sdk-react-core'],
+    noExternal: [],
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+
   },
 });
+
 

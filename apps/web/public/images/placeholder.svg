@@ -1,0 +1,7 @@
+<svg width="300" height="450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="450" fill="#1a1a1a"/>
+  <rect x="20" y="20" width="260" height="360" fill="#333" rx="8"/>
+  <text x="150" y="200" text-anchor="middle" fill="#666" font-family="Arial, sans-serif" font-size="16">Movie Poster</text>
+  <text x="150" y="220" text-anchor="middle" fill="#888" font-family="Arial, sans-serif" font-size="12">300x450</text>
+</svg>
+

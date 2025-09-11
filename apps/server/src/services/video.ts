@@ -126,4 +126,11 @@ export class VideoService {
   }
 }
 
-export const videoService = new VideoService();
+let _videoService: VideoService | null = null;
+
+export const getVideoService = () => {
+  if (!_videoService) {
+    _videoService = new VideoService();
+  }
+  return _videoService;
+};

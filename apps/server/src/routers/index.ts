@@ -9,9 +9,9 @@ import { characters } from "../db/schema/characters";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
-import { videoService } from "../services/video";
+import { getVideoService } from "../services/video";
 import { walrusService } from "../services/walrus";
-import { klingService } from "../services/kling";
+import { getKlingService } from "../services/kling";
 
 import { cinematicUniversesRouter } from "./cinematicUniverses/cinematicUniverses.index";
 
@@ -102,12 +102,12 @@ export const appRouter = router({
         imageUrl: z.string().url().optional() // For image-to-video generation
       }))
       .mutation(async ({ input }) => {
-        return await videoService.generateVideo(input);
+        return await getVideoService().generateVideo(input);
       }),
     status: publicProcedure
       .input(z.object({ id: z.string() }))
       .query(async ({ input }) => {
-        return await videoService.getGenerationStatus(input.id);
+        return await getVideoService().getGenerationStatus(input.id);
       }),
     generateAndWait: publicProcedure
       .input(z.object({
@@ -118,8 +118,8 @@ export const appRouter = router({
         imageUrl: z.string().url().optional() // For image-to-video generation
       }))
       .mutation(async ({ input }) => {
-        const generation = await videoService.generateVideo(input);
-        return await videoService.waitForCompletion(generation.id);
+        const generation = await getVideoService().generateVideo(input);
+        return await getVideoService().waitForCompletion(generation.id);
       }),
     multiImageGenerate: publicProcedure
       .input(z.object({
@@ -134,12 +134,12 @@ export const appRouter = router({
         external_task_id: z.string().optional()
       }))
       .mutation(async ({ input }) => {
-        return await klingService.createMultiImageVideo(input);
+        return await getKlingService().createMultiImageVideo(input);
       }),
     multiImageStatus: publicProcedure
       .input(z.object({ task_id: z.string() }))
       .query(async ({ input }) => {
-        return await klingService.getTaskStatus(input.task_id);
+        return await getKlingService().getTaskStatus(input.task_id);
       }),
     multiImageGenerateAndWait: publicProcedure
       .input(z.object({
@@ -154,8 +154,8 @@ export const appRouter = router({
         external_task_id: z.string().optional()
       }))
       .mutation(async ({ input }) => {
-        const generation = await klingService.createMultiImageVideo(input);
-        return await klingService.waitForCompletion(generation.data.task_id);
+        const generation = await getKlingService().createMultiImageVideo(input);
+        return await getKlingService().waitForCompletion(generation.data.task_id);
       }),
     // Add provider selection for video generation
     generateWithProvider: publicProcedure
@@ -171,7 +171,7 @@ export const appRouter = router({
       .mutation(async ({ input }) => {
         if (input.provider === 'lumaai') {
           // Use existing LumaAI service
-          return await videoService.generateVideo({
+          return await getVideoService().generateVideo({
             prompt: input.prompt,
             model: input.model,
             resolution: input.resolution,
@@ -201,7 +201,7 @@ export const appRouter = router({
           
           console.log('Kling generation - Final image list:', imageList);
           
-          const result = await klingService.createMultiImageVideo({
+          const result = await getKlingService().createMultiImageVideo({
             image_list: imageList,
             prompt: input.prompt,
             mode: 'std', // Cheapest mode

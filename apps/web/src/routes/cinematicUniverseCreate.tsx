@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { useAccount, useDeployContract, useWaitForTransactionReceipt, useBalance, useChainId, useSignMessage } from "wagmi";
-import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,7 +29,6 @@ export const Route = createFileRoute("/cinematicUniverseCreate")({
 
 function CinematicUniverseCreate() {
   const { address, isConnected } = useAccount();
-  const { user } = useDynamicContext();
   const chainId = useChainId();
   const { data: balance } = useBalance({ address });
   const { signMessage } = useSignMessage();

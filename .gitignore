@@ -2,6 +2,7 @@ node_modules
 .turbo
 
 .env
+env.local
 CLAUDE.md
 bun.lock
 bun.lockb

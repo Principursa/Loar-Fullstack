@@ -255,4 +255,11 @@ export class KlingService {
   }
 }
 
-export const klingService = new KlingService();
+let _klingService: KlingService | null = null;
+
+export const getKlingService = () => {
+  if (!_klingService) {
+    _klingService = new KlingService();
+  }
+  return _klingService;
+};

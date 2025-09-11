@@ -146,12 +146,12 @@ If you encounter dependency issues:
 - **Server:** http://localhost:3000
 - **API Documentation:** http://localhost:3000/trpc
 
-## 🔐 Dynamic Wallet Features
+## 🔐 Wallet Features
 
-- **Multi-Wallet Support** - MetaMask, WalletConnect, Coinbase Wallet, and more
-- **Embedded Wallets** - MPC-based wallet creation
-- **Smart Accounts** - Account abstraction support
-- **Multi-Chain** - Ethereum, Polygon, Base, and other EVM chains
+- **Porto Wallet Integration** - Universal next-gen accounts on Base
+- **Base Network Support** - Optimized for Base mainnet and testnet
+- **Smart Contract Integration** - Timeline and governance contracts
+- **Account Abstraction** - MPC-based wallet creation and management
 - **Mobile Support** - QR code scanning and mobile wallet integration
 
 ## 📁 Project Structure

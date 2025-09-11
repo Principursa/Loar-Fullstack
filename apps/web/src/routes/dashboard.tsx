@@ -1,4 +1,4 @@
-import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { useAccount, useConnect, useConnectors } from "wagmi";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,30 +10,38 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function RouteComponent() {
-  const { user, isConnecting, handleConnect } = useDynamicContext();
+  const { address, isConnected } = useAccount();
+  const { connect, connectors } = useConnect();
   const navigate = Route.useNavigate();
 
+  const handleConnect = () => {
+    const portoConnector = connectors.find(connector => connector.name === 'Porto');
+    if (portoConnector) {
+      connect({ connector: portoConnector });
+    }
+  };
+
   useEffect(() => {
-    if (!user && !isConnecting) {
+    if (!isConnected) {
       navigate({
         to: "/",
       });
     }
-  }, [user, isConnecting, navigate]);
+  }, [isConnected, navigate]);
 
   const copyAddress = () => {
-    if (user?.wallets?.[0]?.address) {
-      navigator.clipboard.writeText(user.wallets[0].address);
+    if (address) {
+      navigator.clipboard.writeText(address);
     }
   };
 
   const openExplorer = () => {
-    if (user?.wallets?.[0]?.address) {
-      window.open(`https://etherscan.io/address/${user.wallets[0].address}`, '_blank');
+    if (address) {
+      window.open(`https://basescan.org/address/${address}`, '_blank');
     }
   };
 
-  if (isConnecting) {
+  if (!isConnected) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
@@ -44,7 +52,7 @@ function RouteComponent() {
     );
   }
 
-  if (!user) {
+  if (!address) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Card className="w-full max-w-md">
@@ -57,7 +65,7 @@ function RouteComponent() {
           <CardContent>
             <Button onClick={handleConnect} className="w-full">
               <Wallet className="mr-2 h-4 w-4" />
-              Connect Wallet
+              Connect Porto
             </Button>
           </CardContent>
         </Card>
@@ -81,12 +89,12 @@ function RouteComponent() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div>
-              <label className="text-sm font-medium text-muted-foreground">Address</label>
-              <div className="flex items-center gap-2 mt-1">
-                <code className="text-sm bg-muted px-2 py-1 rounded">
-                  {user.wallets?.[0]?.address}
-                </code>
+                        <div>
+                          <label className="text-sm font-medium text-muted-foreground">Address</label>
+                          <div className="flex items-center gap-2 mt-1">
+                            <code className="text-sm bg-muted px-2 py-1 rounded">
+                              {address}
+                            </code>
                 <Button variant="ghost" size="sm" onClick={copyAddress}>
                   <Copy className="h-4 w-4" />
                 </Button>
@@ -96,12 +104,10 @@ function RouteComponent() {
               </div>
             </div>
             
-            {user.wallets?.[0]?.chain && (
-              <div>
-                <label className="text-sm font-medium text-muted-foreground">Network</label>
-                <p className="text-sm mt-1">{user.wallets[0].chain}</p>
-              </div>
-            )}
+                        <div>
+                          <label className="text-sm font-medium text-muted-foreground">Network</label>
+                          <p className="text-sm mt-1">Base</p>
+                        </div>
           </CardContent>
         </Card>
 
@@ -109,28 +115,19 @@ function RouteComponent() {
           <CardHeader>
             <CardTitle>Account Details</CardTitle>
             <CardDescription>
-              Your Dynamic account information
+              Your account information
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {user.email && (
-              <div>
-                <label className="text-sm font-medium text-muted-foreground">Email</label>
-                <p className="text-sm mt-1">{user.email}</p>
-              </div>
-            )}
-            
-            {user.username && (
-              <div>
-                <label className="text-sm font-medium text-muted-foreground">Username</label>
-                <p className="text-sm mt-1">{user.username}</p>
-              </div>
-            )}
-            
-            <div>
-              <label className="text-sm font-medium text-muted-foreground">User ID</label>
-              <p className="text-sm mt-1">{user.id}</p>
-            </div>
+                        <div>
+                          <label className="text-sm font-medium text-muted-foreground">Name</label>
+                          <p className="text-sm mt-1">Porto User</p>
+                        </div>
+                        
+                        <div>
+                          <label className="text-sm font-medium text-muted-foreground">Address</label>
+                          <p className="text-sm mt-1 font-mono">{address}</p>
+                        </div>
           </CardContent>
         </Card>
       </div>
